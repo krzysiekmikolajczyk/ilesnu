@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Licznik snu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Licznik snu 😴</h1>
+
+  <form>
+    <label>
+      <input type="radio" name="mode" value="now" checked onchange="toggleSleepTime()"> Idę spać teraz
+    </label><br>
+    <label>
+      <input type="radio" name="mode" value="custom" onchange="toggleSleepTime()"> Ustawię godzinę zaśnięcia
+    </label>
+  </form>
+
+  <div id="sleepTimeContainer" style="display: none;">
+    <label for="sleepTime">Godzina pójścia spać:</label>
+    <input type="time" id="sleepTime">
+  </div>
+
+  <div>
+    <label for="wakeTime">Godzina pobudki:</label>
+    <input type="time" id="wakeTime">
+  </div>
+
+  <button onclick="calculateSleep()">Oblicz</button>
+
+  <p id="result"></p>
+
+  <script src="script.js"></script>
+</body>
+</html>

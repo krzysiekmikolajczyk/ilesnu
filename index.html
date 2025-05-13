@@ -8,17 +8,26 @@
 </head>
 <body class="dark-mode">
   <div class="container">
-    <button id="toggle-theme">Zmień motyw</button>
+    <button id="toggle-theme">
+      <span id="theme-icon">🌙</span>
+    </button>
     <h1>Ile będziesz spać?</h1>
     <form id="sleepForm">
       <label for="modeSelect">Wybierz tryb:</label>
       <select id="modeSelect">
         <option value="now">Idę spać teraz</option>
-        <option value="custom">Godzina pójścia spać:</option>
+        <option value="custom">Podam godzinę zaśnięcia</option>
       </select>
 
-      <label for="bedtime">Godzina pobudki:</label>
-      <input type="time" id="bedtime" />
+      <div id="bedtime-container" style="display: none;">
+        <label for="bedtime">Godzina zaśnięcia:</label>
+        <input type="time" id="bedtime" />
+      </div>
+
+      <div id="wakeuptime-container">
+        <label for="wakeuptime">Godzina pobudki:</label>
+        <input type="time" id="wakeuptime" required />
+      </div>
 
       <input type="submit" value="Oblicz" />
     </form>

@@ -4,6 +4,7 @@
   --input-bg: #1e1e1e;
   --button-bg: #3498db;
   --button-hover: #2980b9;
+  --accent: #ffcc00;
 }
 
 body {
@@ -19,6 +20,10 @@ body {
   max-width: 600px;
   margin: auto;
   text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
 }
 
 input, select {
@@ -37,6 +42,7 @@ input[type="submit"] {
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-weight: bold;
 }
 
 input[type="submit"]:hover {
@@ -44,17 +50,23 @@ input[type="submit"]:hover {
 }
 
 #toggle-theme {
-  margin-bottom: 20px;
-  padding: 10px 20px;
-  background: #555;
-  color: white;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: none;
   border: none;
+  font-size: 24px;
   cursor: pointer;
-  border-radius: 5px;
+  color: var(--accent);
+  border-radius: 50%;
+  padding: 8px;
 }
 
 .light-mode {
   --bg-color: #ffffff;
   --text-color: #000000;
   --input-bg: #f0f0f0;
+  --button-bg: #007bff;
+  --button-hover: #0056b3;
+  --accent: #333;
 }

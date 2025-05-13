@@ -1,36 +1,29 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>Licznik snu</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ile będziesz spać?</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <h1>ile będziesz spać?</h1>
+<body class="dark-mode">
+  <div class="container">
+    <button id="toggle-theme">Zmień motyw</button>
+    <h1>Ile będziesz spać?</h1>
+    <form id="sleepForm">
+      <label for="modeSelect">Wybierz tryb:</label>
+      <select id="modeSelect">
+        <option value="now">Idę spać teraz</option>
+        <option value="custom">Godzina pójścia spać:</option>
+      </select>
 
-  <form>
-    <label>
-      <input type="radio" name="mode" value="now" checked onchange="toggleSleepTime()"> Idę spać teraz
-    </label><br>
-    <label>
-      <input type="radio" name="mode" value="custom" onchange="toggleSleepTime()"> Ustawię godzinę zaśnięcia
-    </label>
-  </form>
+      <label for="bedtime">Godzina pobudki:</label>
+      <input type="time" id="bedtime" />
 
-  <div id="sleepTimeContainer" style="display: none;">
-    <label for="sleepTime">Godzina pójścia spać:</label>
-    <input type="time" id="sleepTime">
+      <input type="submit" value="Oblicz" />
+    </form>
+    <div id="result"></div>
   </div>
-
-  <div>
-    <label for="wakeTime">Godzina pobudki:</label>
-    <input type="time" id="wakeTime">
-  </div>
-
-  <button onclick="calculateSleep()">Oblicz</button>
-
-  <p id="result"></p>
-
   <script src="script.js"></script>
 </body>
 </html>

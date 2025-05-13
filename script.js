@@ -1,57 +1,31 @@
-function toggleSleepTime() {
-    const mode = document.querySelector('input[name="mode"]:checked').value;
-    const sleepTimeContainer = document.getElementById("sleepTimeContainer");
+// Przełączanie motywu
+document.getElementById('toggle-theme').addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+  });
   
-    if (mode === "custom") {
-      sleepTimeContainer.style.display = "block";
+  // Obliczanie godzin snu
+  document.getElementById('sleepForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+  
+    const mode = document.getElementById('modeSelect').value;
+    const inputTime = document.getElementById('bedtime').value;
+  
+    const now = new Date();
+    let bedtime;
+  
+    if (mode === 'now') {
+      const parts = inputTime.split(':');
+      bedtime = new Date();
+      bedtime.setHours(parts[0], parts[1], 0, 0);
     } else {
-      sleepTimeContainer.style.display = "none";
-    }
-  }
-  
-  function calculateSleep() {
-    const mode = document.querySelector('input[name="mode"]:checked').value;
-    const wakeTimeInput = document.getElementById("wakeTime").value;
-    const resultElement = document.getElementById("result");
-  
-    if (!wakeTimeInput) {
-      resultElement.textContent = "Podaj godzinę pobudki!";
-      return;
+      bedtime = new Date(now.toDateString() + ' ' + inputTime);
     }
   
-    let sleepTime;
+    let diff = (bedtime - now) / (1000 * 60 * 60);
   
-    if (mode === "now") {
-      sleepTime = new Date();
-    } else {
-      const sleepTimeInput = document.getElementById("sleepTime").value;
-      if (!sleepTimeInput) {
-        resultElement.textContent = "Podaj godzinę zaśnięcia!";
-        return;
-      }
-      const [h, m] = sleepTimeInput.split(":").map(Number);
-      sleepTime = new Date();
-      sleepTime.setHours(h, m, 0, 0);
-      if (sleepTime > new Date()) {
-        // OK, jeszcze dziś
-      } else {
-        // zasypianie już minęło – zakładamy, że chodzi o jutro
-        sleepTime.setDate(sleepTime.getDate() + 1);
-      }
-    }
+    if (diff < 0) diff += 24; // dodaj dobę, jeśli czas już minął
   
-    const [wakeH, wakeM] = wakeTimeInput.split(":").map(Number);
-    const wakeTime = new Date(sleepTime);
-    wakeTime.setHours(wakeH, wakeM, 0, 0);
-  
-    if (wakeTime <= sleepTime) {
-      wakeTime.setDate(wakeTime.getDate() + 1);
-    }
-  
-    const diffMs = wakeTime - sleepTime;
-    const diffH = Math.floor(diffMs / (1000 * 60 * 60));
-    const diffM = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-  
-    resultElement.textContent = `Będziesz spać ${diffH} godzin i ${diffM} minut. 🛌`;
-  }
+    document.getElementById('result').textContent =
+      `Pozostało ${diff.toFixed(2)} godziny(a) snu.`;
+  });
   
